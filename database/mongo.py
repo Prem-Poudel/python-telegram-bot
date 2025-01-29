@@ -75,12 +75,12 @@ class Mongo:
         '''Store the user's phone number in the database'''
         user_collection = self.get_collection('users')
         try:
-             result = user_collection.update_one(
+            user_collection.update_one(
             {"chat_id": chat_id},
             {"$set": {"phone_number": phone_number}}
     
         )
-             return "Phone number saved successfully."
+            return "Phone number saved successfully."
         except errors.PyMongoError as err:
             print(f'Failed to save phone number: {err}')
             return "Failed to save phone number."

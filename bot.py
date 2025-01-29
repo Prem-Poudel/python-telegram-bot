@@ -1,5 +1,6 @@
 from telegram.ext import Application, MessageHandler, filters, CommandHandler
 from handlers.registration import start, contact
+from handlers.chat import gemini_chat
 
 
 import os
@@ -14,6 +15,7 @@ def main():
 
     application.add_handler(CommandHandler('start', start))
     application.add_handler(MessageHandler(filters.CONTACT,  contact))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, gemini_chat))
 
     application.run_polling()
 
