@@ -3,11 +3,18 @@
 ![Gemini AI Bot](https://png.pngtree.com/background/20231030/original/pngtree-d-render-of-an-adorable-ai-bot-helper-ideal-for-business-picture-image_5810378.jpg)
 
 
-This Telegram bot manages user registration and provides various features like chatting, file analysis, and web searching.
+An asynchronous Python Telegram bot that integrates with Gemini AI to provide dynamic content generation and image summarization. The bot utilizes MongoDB for efficient data storage and retrieval.
 
 ## Features
 
 - **User Registration**: Automatically registers users using their Telegram profile information (first name, username, and chat ID) and then prompts them to provide their phone number.
+- **Gemini Chat**: Integrates with Gemini AI to generate dynamic content based on user queries, enabling interactive and intelligent responses.
+
+- **Image Analysis**: Allows users to send images, which are then processed by Gemini AI to generate descriptive summaries.
+
+- **Web Search /websearch <query>**: Performs web searches based on user queries and returns AI-generated summaries with top web links.
+
+- **Sentiment Analysis**: Analyzes the sentiment of user messages and appends corresponding emojis (😊 for positive, 😞 for negative). **No emoji is appended for neutral sentiment**.
 
 ## Tools and Resources Used
 
