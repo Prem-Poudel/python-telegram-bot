@@ -38,7 +38,7 @@ async def handle_document(user_message, chat_id, timestamp, download_dir, contex
 
     try:
         description = generate_description_from_file(file_path)
-        bot_response = f"Description of the file '{file_name}' is: {description}"
+        bot_response = f"**Description of the file '{file_name}**' is: {description}"
 
         file_metadata = {
             'chat_id': chat_id,
@@ -65,7 +65,7 @@ async def handle_photo(user_message, chat_id, timestamp, download_dir, context):
 
     try:
         description = generate_description_from_image(file_path)
-        bot_response = f"Description of the photo is: {description}"
+        bot_response = f"**Description of the photo is:** {description}"
 
         image_metadata = {
             'chat_id': chat_id,
@@ -96,10 +96,9 @@ def generate_description_from_file(file_path):
 def generate_description_from_image(image_path):
     """Generate a description for an image file."""
     try:
-        with Image.open(image_path) as img:
-            img_data = base64.b64encode(img.tobytes()).decode('utf-8')
+        img = Image.open(image_path)
         prompt = "Generate a description for the image."
-        context = [img_data, prompt]
+        context = [prompt, img]
         return generate_description(context)
     except Exception as e:
         print(f"Error generating description from image: {e}")

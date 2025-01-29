@@ -1,0 +1,6 @@
+python-telegram-bot
+google-generativeai
+pillow
+pymongo
+python-dotenv
+emoji

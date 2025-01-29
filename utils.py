@@ -3,11 +3,30 @@ import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
-# Configure Gemini API
-genai.configure(api_key=os.getenv('GEMINI_TOKEN'))
+def connect_to_gemini():
+    """Connect to Gemini API."""
+    try:
+        genai.configure(api_key=os.getenv('GEMINI_TOKEN'))
+        return True
+    except Exception as e:
+        print(f"Error connecting to Gemini API: {e}")
+        return False
 
+def validate_connection():
+    """Validate connection to Gemini API."""
+    if connect_to_gemini():
+        print("Connected to Gemini API.")
+    else:
+        print("Unable to connect to Gemini API.")
+
+validate_connection()
+
+
+
+# Configure Gemini API
 def generate_description(content):
     """Generates description using Gemini API."""
     system_instruction = 'You are a assistant that assists users with their queries. Your name is JARVIS. Jarvis stands for Just A Rather Very Intelligent System.'

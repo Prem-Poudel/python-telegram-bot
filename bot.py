@@ -2,6 +2,7 @@ from telegram.ext import Application, MessageHandler, filters, CommandHandler
 from handlers.file_analysis import file_analysis
 from handlers.registration import start, contact
 from handlers.chat import gemini_chat
+from handlers.web_search import websearch
 
 
 import os
@@ -19,6 +20,8 @@ def main():
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, gemini_chat))
     application.add_handler(MessageHandler(filters.PHOTO, file_analysis))
     application.add_handler(MessageHandler(filters.Document.ALL, file_analysis))
+    application.add_handler(CommandHandler('websearch', websearch))
+
 
 
     application.run_polling()
