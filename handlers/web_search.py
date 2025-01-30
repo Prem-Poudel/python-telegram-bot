@@ -44,7 +44,6 @@ async def websearch(update: Update, context: CallbackContext):
         return
     
     search_results = google_search(query)
-    print(search_results)
     if not search_results:
         await update.message.reply_text('No search results found.')
         return
