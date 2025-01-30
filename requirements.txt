@@ -4,3 +4,4 @@ pillow
 pymongo
 python-dotenv
 emoji
+google-api-python-client

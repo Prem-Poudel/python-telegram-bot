@@ -4,11 +4,33 @@ from database.mongo import Mongo
 from utils import generate_description
 from datetime import datetime, timezone
 import google.generativeai as genai
+from googleapiclient.discovery import build
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+# Google Search API Key
+API_KEY = os.getenv('GOOGLE_SEARCH_TOKEN')
+
+# Google Search Engine ID
+SEARCH_ENGINE_ID = os.getenv('GOOGLE_SEARCH_ENGINE_ID')
 
 
 mongo = Mongo()
 websearch_collection = mongo.get_collection('websearches')
 
+def google_search(query):
+    '''Fetch search results from Google Search API.'''
+    try:
+        service = build("customsearch", "v1", developerKey=API_KEY)
+        res = service.cse().list(q=query, cx=SEARCH_ENGINE_ID).execute()
+        results = res.get('items', [])
+
+        return [f"- [{item['title']}]({item['link']})" for item in results] if results else []
+    except Exception as e:
+        print(f'Error fetching search results: {e}')
+        return []
 
 
 async def websearch(update: Update, context: CallbackContext):
@@ -21,12 +43,19 @@ async def websearch(update: Update, context: CallbackContext):
         await update.message.reply_text('Please provide a query to search.')
         return
     
-    prompt=f"Perform a search for: {query}. Summarize the top results with relevant web links if possible."
+    search_results = google_search(query)
+    print(search_results)
+    if not search_results:
+        await update.message.reply_text('No search results found.')
+        return
+    
+    prompt=f"Summarize the search results for the query: {query}".join(search_results)
+    
     response = generate_description(prompt)
 
 
     if response:
-        await update.message.reply_text(f'**Search Results for:** {query}\n\n{response}')
+        await update.message.reply_text(f'**Search Results for:** {query}\n\n{response}\n\n**Resources**\n\n{search_results[:5]}')
     else:
         await update.message.reply_text('An error occurred while searching the web.')
     

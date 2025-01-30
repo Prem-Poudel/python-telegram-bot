@@ -22,43 +22,65 @@ An asynchronous Python Telegram bot that integrates with Gemini AI to provide dy
 - **GitHub Copilot**: Used GitHub Copilot to enhance the code quality and make it more efficient by suggesting improvements and reducing repetitive code.
 - **Gemini API**: Integrated the Gemini API to generate content dynamically based on user queries, enabling more interactive and intelligent responses.
 - **Gemini API Documentation**: Referenced the official Gemini API documentation to understand the capabilities and limitations of the API and to implement it correctly in the project.
+- **Custom Search API**: Implemented the Google Custom Search API to fetch relevant web search results based on user queries.
+- **Search Engine ID**: Configured in the project to query the Custom Search Engine.
 
 ## How It Works
 
-1. The bot receives user input through Telegram and interacts with the Gemini API to generate relevant responses.
-2. It handles user registration and stores user data for further interactions.
-3. The bot can analyze files and perform web searches based on user requests.
+1. **User Input**: The bot receives user input through Telegram and interacts with the Gemini API to generate relevant responses.
+2. **User Registration**: It handles user registration and stores user data for future interactions.
+3. **Image Analysis**: Users can send images that the bot processes using the Gemini API to generate descriptive summaries.
+4. **File Analysis**: Users can send PDF filess that the bot processes using Gemini API to generate descriptive summaries.
+5. **Web Search**: The bot can perform web searches based on user requests and provide AI-generated summaries with top search links.
+6. **Sentiment Analysis**: It analyzes the sentiment of user messages and appends appropriate emojis to enhance engagement.
 
 ## Getting Started
 
-To run the bot, you need to set up the following:
+To run the bot, follow these steps:
 
-1. Install virtual environment:
+1. **Install Python** (if not already installed):
+   - Download and install Python from [here](https://www.python.org/downloads/).
+
+2. **Set up a Virtual Environment**:
     ```bash
     py -m venv env
     ```
 
-2. Activate the virtual environment:
-    - For Mac/Linux users:
+3. **Activate the Virtual Environment**:
+    - For **Mac/Linux** users:
       ```bash
       source env/bin/activate
       ```
-    - For Windows users:
+    - For **Windows** users:
       ```bash
       .\env\Scripts\activate
       ```
 
-3. Install the required dependencies:
+4. **Install the Dependencies**:
    ```bash
    pip install -r requirements.txt
     ```
 
-4. Add a `.env` file in the project root directory with the following content:
+5. **Create a `.env` file** in the project root directory with the following content:
+    ```env
+    TELEGRAM_TOKEN=<your_telegram_api_key>
+    GEMINI_TOKEN=<your_gemini_api_key>
+    MONGO_URI=<your_mongodb_uri>
+    GOOGLE_SEARCH_TOKEN=<your_google_custom_search_key>
+    GOOGLE_SEARCH_ENGINE_ID=<your_search_engine_id>
+    ```
 
-Finally, run the command:
+6. **Run the Bot**:
     ```bash
     py bot.py
     ```
+
+Now, your bot should be running and accessible on Telegram!
+
+## Example Commands
+
+- `/start`: Start the bot and register your details.
+- `/websearch <query>`: Perform a web search and receive AI-generated summaries with the top web links.
 
 
 This should cover everything you need for your project setup, from dependencies to the `.env` configuration and running the bot.
